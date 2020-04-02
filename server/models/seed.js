@@ -33,6 +33,7 @@ const hostImages = [];
 (function createHostsData() {
   for (let i = 0; i < 10; i++) {
     let host = {
+      listingId: '',
       zip: '',
       name: '',
       image: '',
@@ -58,6 +59,7 @@ const hostImages = [];
     };
     let zip = faker.address.zipCode().slice(0, 5);
     zips.push(zip);
+    host.listingId = i;
     host.zip = zip;
     host.name = faker.name.firstName();
     host.image = hostImages.shift();
@@ -77,10 +79,12 @@ const hostImages = [];
 (function createAreasData() {
   for (let i = 0; i < zips.length; i++) {
     let area = {
+      listingId: '',
       zip: '',
-    properties: [],
-    thingsToDo: []
+      properties: [],
+      thingsToDo: []
     };
+    area.listingId = i;
     area.zip = zips[i];
     area.properties = [];
     area.thingsToDo = [];

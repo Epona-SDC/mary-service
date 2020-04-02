@@ -21,9 +21,9 @@ app.get('/host', cors(), function(req, res) {
   Host.find(req.query, (err, arr) => res.send(arr));
 });
 
-app.get('/app.js', cors(), function (req, res) {
-  res.sendFile(path.join(__dirname, '../public/bundle.js'))
-});
+// app.get('/app.js', cors(), function (req, res) {
+//   res.sendFile(path.join(__dirname, '../public/bundle.js'))
+// });
 
 app.get('/zip', cors(), function (req, res) {
   Host.find({}, 'zip', (err, data) => res.send(data));

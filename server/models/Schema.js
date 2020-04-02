@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const db = require('./index.js');
 
 const hostSchema = new Schema({
+  listingId: Number,
   zip: String,
   name: String,
   image: String,
@@ -27,6 +28,7 @@ const hostSchema = new Schema({
 });
 
 const areaSchema = new Schema({
+  listingId: Number,
   zip: String,
   properties: [
     {
