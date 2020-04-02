@@ -17,7 +17,24 @@
 
 ## Usage
 
-> Some usage instructions
+> Available Api routes
+I. GET
+'/host/:id'
+Finds and retrieves a host document from the database using the specified id from req.params.id.
+
+II. POST
+'/host'
+Creates a new host document and saves it the database. Uses req.body.PROPERTY where property are the fields to be filled in in JSON format.
+
+III> DELETE
+'/host/:id'
+Finds a host document in the database by specified id from req.params.id and deletes the entry from the database.
+
+IV. PUT
+'/host/:id'
+Finds a host document in the database by specified id from rew.params.id and updates the name to the specified field. The fields can be changed as needed to target the specific field.
+
+
 
 ## Requirements
 
