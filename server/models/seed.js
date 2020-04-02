@@ -31,8 +31,9 @@ const hostImages = [];
 })();
 
 (function createHostsData() {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 1; i <= 100; i++) {
     let host = {
+      _id: i,
       listingId: '',
       zip: '',
       name: '',
@@ -84,7 +85,7 @@ const hostImages = [];
       properties: [],
       thingsToDo: []
     };
-    area.listingId = i;
+    area.listingId = i + 1;
     area.zip = zips[i];
     area.properties = [];
     area.thingsToDo = [];

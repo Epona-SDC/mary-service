@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const db = require('./index.js');
 
 const hostSchema = new Schema({
+  _id: Number,
   listingId: Number,
   zip: String,
   name: String,
