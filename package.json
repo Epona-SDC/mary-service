@@ -11,7 +11,7 @@
     "start-dev": "nodemon ./server/server.js",
     "start-pro": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
-    "seed": "node server/models/seed.js",
+    "seed": "node databases/seeddb.js",
     "test": "jest"
   },
   "dependencies": {
