@@ -1,0 +1,64 @@
+CREATE KEYSPACE maryairbnb with replication = {'class':'SimpleStrategy', 'replication_factor' : 1};
+
+use maryairbnb;
+
+CREATE TABLE listings
+(
+  id int,
+  image text,
+  ratings decimal,
+  reviews int,
+  neighborhood text,
+  gettingAround text,
+  rules text,
+  host map<text, text>,
+  primary key (id)
+);
+
+
+COPY maryairbnb.cyclist_catgory FROM 'cyclist_category.csv' WITH DELIMITER='|' AND HEADER=TRUE
+
+//mini with no host info
+COPY mini.listings (id, image, ratings, reviews, neighborhood, gettingAround, rules)FROM '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/cassandra/test.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+
+//minie with host info added NOPE
+COPY mini.listings (id, image, ratings, reviews, neighborhood, gettingAround, rules, host)FROM '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/cassandra/test.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+
+//
+CREATE TABLE listings
+(
+  id int,
+  image text,
+  ratings decimal,
+  reviews int,
+  neighborhood text,
+  gettingAround text,
+  rules text,
+  name text,
+  profile text,
+  city text,
+  state text,
+  blurb text,
+  interaction text,
+  monthJoined text,
+  yearJoined int,
+  primary key (id)
+);
+
+//mini listings with host info flat
+COPY mini.listings (id, image, ratings, reviews, neighborhood, gettingAround, rules, name, profile, city, state, blurb, interaction, monthJoined, yearJoined) FROM '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/cassandra/mini.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+
+//with 10M
+COPY maryairbnb.listings (id, image, ratings, reviews, neighborhood, gettingAround, rules, name, profile, city, state, blurb, interaction, monthJoined, yearJoined) FROM '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/cassandra/clistings.csv' WITH DELIMITER=';' AND HEADER=TRUE;
+
+//allow for query times
+trace On
+
+//get
+select * from listings where id=NUMBER;
+
+//add a record
+INSERT INTO maryairbnb.listings (id, image, ratings, reviews, neighborhood, gettingAround, rules, name, profile, city, state, blurb, interaction, monthJoined, yearJoined) VALUES (10000001, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/26.jpg', 6.520175131878631, 248, 'HELLO', 'HELLO', 'Qui fugit veritatis iusto et.', 'Travis', 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/host23.jpg', 'Lake Camrenhaven', 'NV', 'HELLO', 'HELLO', 'April', 2012);
+
+//delete
+DELETE from maryairbnb.listings where id=10000001;
