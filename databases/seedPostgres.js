@@ -2,14 +2,14 @@ const faker = require('faker');
 const fs = require('fs');
 
 //number of recoreds crated
-const numHosts = 4000000;
-const numListings = 10000001;
+const numHosts = 3000000;
+const numListings = 1000000;
 
-const writeHosts = fs.createWriteStream('allHosts.csv');
+const writeHosts = fs.createWriteStream('3mHosts.csv');
 //writes a header for the file
 writeHosts.write('id;name;image;city;state;blurb;interaction;monthJoined;yearJoined\n', 'utf8');
 
-const write4MHosts = (writer, encoding, callback) => {
+const write3MHosts = (writer, encoding, callback) => {
   let i = numHosts;
   let id = 0;
   const write = () => {
@@ -17,7 +17,6 @@ const write4MHosts = (writer, encoding, callback) => {
     do {
       i--;
       id++;
-
       const name = faker.name.firstName();
       const image = `https://ep-sdc-images.s3-us-west-2.amazonaws.com/host${Math.floor(Math.random() * 31) + 1}.jpg`;
       const city = faker.address.city();
@@ -26,7 +25,7 @@ const write4MHosts = (writer, encoding, callback) => {
       const interaction = faker.lorem.sentences();
       const month = faker.date.month();
       const year = 2020 - Math.floor(Math.random() * 11);
-      const data = `${id}; ${name}; ${image}, ${city}; ${state}; ${blurb}; ${interaction}; ${month}; ${year}\n`;
+      const data = `${id}; ${name}; ${image}; ${city}; ${state}; ${blurb}; ${interaction}; ${month}; ${year}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback);
       } else {
@@ -40,12 +39,12 @@ const write4MHosts = (writer, encoding, callback) => {
   write();
 };
 
-write4MHosts(writeHosts, 'utf-8', () => {
+write3MHosts(writeHosts, 'utf-8', () => {
   console.log('done writing host csv file');
   writeHosts.end();
 });
 
-const writeListings = fs.createWriteStream('listings1.csv');
+const writeListings = fs.createWriteStream('1M1.csv');
 //writes a header for the file
 writeListings.write('id;host;image;ratings;reviews;neighborhood;gettingAround;rules\n');
 
@@ -57,7 +56,7 @@ const write10MListings = (writer, encoding, callback) => {
     do {
       i--;
       id++;
-      const host = Math.floor(Math.random() * 4000001) + 1;
+      const host = Math.floor(Math.random() * 3000000) + 1;
       const image = `https://ep-sdc-images.s3-us-west-2.amazonaws.com/${Math.floor(Math.random() * 56) + 1}.jpg`;
       const ratings = Math.random() * 5 + 2;
       const reviews = Math.floor(Math.random() * 500);
