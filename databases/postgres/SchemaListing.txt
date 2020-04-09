@@ -1,4 +1,3 @@
-Version 1:
 CREATE TABLE listings
 (
   id INTEGER PRIMARY KEY NOT NULL,
@@ -11,50 +10,27 @@ CREATE TABLE listings
   rules VARCHAR(255) NOT NULL
 );
 
-Version 2
-CREATE TABLE listings
-(
-  id INTEGER PRIMARY KEY NOT NULL,
-  host INTEGER NOT NULL,
-  image VARCHAR(60) NOT NULL,
-  ratings DECIMAL NOT NULL,
-  reviews INTEGER NOT NULL,
-  neighborhood VARCHAR(500) NOT NULL,
-  interaction VARCHAR(500) NOT NULL
-);
 
-enter this:
-\COPY listings from '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/10mListings.csv' DELIMITER ';' CSV Header;
+//Below, change path name to where your Host.csv file is
+//Then copy the below command into your psql shell!!!!
 
-enter this:
+\COPY listings from '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/Listings.csv' DELIMITER ';' CSV Header;
+
+//to add the foreign key constraint, enter this:
 \alter table listings add constraint fk_listings_host foreign key (host) references hosts (id);
 
-Join query
 
-//selecing listings.reviews column and host.name column
-select listings.reviews, hosts.name from listings inner join hosts on listings.host=hosts.id where listings.id=5;
+//Here are the querries you can make from the psql shell
 
-//front query
-select * from listings inner join hosts on listings.host=hosts.id and listings.id=5;
+//GET by listing id
+SELECt * FROM listings inner join hosts on listings.host=hosts.id where listings.id=9800000;
 
-GET by listing id
-//this one works perfectly
-select * from listings inner join hosts on listings.host=hosts.id where listings.id=9800000;
-//selecting all columns from listings
-//join value is lsitings.host=host.id
-//inner join the two tables on (see above)
-//last where listings.id=# for our input based on listing.id
-
-//post
-//DONOT RUN insert into listings (id, host, image, ratings, reviews, neighborhood, gettingaround, rules) values (11, 2, 'property image url from amazon', 3.3452, 123, 'lots and lots of text for neighborhood. and some more', 'more text for getting around', 'sentence');
-select * from listings where id=11;
-
-//CORRECT POST, change id number as needed
-insert into listings (id, host, image, ratings, reviews, neighborhood, gettingaround, rules) values (10000004, 2, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', 3.9269188095712453, 470, 'Quisquam dolorem esse. Nihil sequi cupiditate laborum. Dolore incidunt unde rerum modi. Tenetur velit vitae sed quisquam nemo error iste. Error laboriosam non quidem cupiditate eum. Hic qui doloribus.', 'Officiis et beatae ex aut. Est ipsam enim labore iusto culpa harum architecto rem. Voluptatem quia laudantium.', 'Doloremque dignissimos animi ducimus quia soluta quo');
+// POST, change id number as needed
+INSERT INTO listings (id, host, image, ratings, reviews, neighborhood, gettingaround, rules) values (CHANGEME, 2, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', 3.9269188095712453, 470, 'Quisquam dolorem esse. Nihil sequi cupiditate laborum. Dolore incidunt unde rerum modi. Tenetur velit vitae sed quisquam nemo error iste. Error laboriosam non quidem cupiditate eum. Hic qui doloribus.', 'Officiis et beatae ex aut. Est ipsam enim labore iusto culpa harum architecto rem. Voluptatem quia laudantium.', 'Doloremque dignissimos animi ducimus quia soluta quo');
 
 
 //delete; change id number as needed
-explain analyze DELETE FROM listings WHERE id=500000;
+DELETE FROM listings WHERE id=500000;
 
 //update; change id number as needed, set image and rules to new values;
-explain analyze UPDATE listings SET image = 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', rules = 'No pets allowed.' where id=5000000;
+UPDATE listings SET image = 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', rules = 'No pets allowed.' where id=5000000;

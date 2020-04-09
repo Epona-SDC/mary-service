@@ -5,7 +5,7 @@ const fs = require('fs');
 const numHosts = 3000000;
 const numListings = 1000000;
 
-const writeHosts = fs.createWriteStream('3mHosts.csv');
+const writeHosts = fs.createWriteStream('Hosts.csv');
 //writes a header for the file
 writeHosts.write('id;name;image;city;state;blurb;interaction;monthJoined;yearJoined\n', 'utf8');
 
@@ -44,7 +44,7 @@ write3MHosts(writeHosts, 'utf-8', () => {
   writeHosts.end();
 });
 
-const writeListings = fs.createWriteStream('1M1.csv');
+const writeListings = fs.createWriteStream('Listings.csv');
 //writes a header for the file
 writeListings.write('id;host;image;ratings;reviews;neighborhood;gettingAround;rules\n');
 

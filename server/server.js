@@ -2,101 +2,69 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mongoose = require('mongoose');
-const { Host, Area } = require('./models/Schema.js');
+const client = require('../databases/connection.js');
 
 const port = 3004;
 const app = express();
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(cors());
 app.use(bodyParser.json());
 
 
-app.get('/area', function(req, res) {
-  Area.find(req.query, (err, arr) => res.send(arr));
-});
 
-app.get('/host', function(req, res) {
-  Host.find(req.query, (err, arr) => res.send(arr));
-});
 
-// app.get('/app.js', cors(), function (req, res) {
-//   res.sendFile(path.join(__dirname, '../public/bundle.js'))
-// });
-
-app.get('/zip', cors(), function (req, res) {
-  Host.find({}, 'zip', (err, data) => res.send(data));
-});
-//GET /read host data by listingId
-app.get('/host/:id', (req, res) => {
-  Host.find({listingId: req.params.id})
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      console.error('ERROR, listing does not exist');
-      res.status(404).end();
-    });
-
-});
-
-//need to rework the listingNumber
-let listingNumber = 101;
-//POST create a new record to the db
-app.post('/host', (req, res) => {
-  let doc = new Host({
-    listingId: listingNumber,
-    zip: req.body.zip,
-    name: req.body.name,
-    body: req.body.body,
-    interaction: req.body.interaction,
-    superhost: 'Superhost',
-    verified: 'Verified',
-    rules: {
-      checkin: '12AM - 3PM',
-      checkout: '10AM',
-      body: 'A bunch of rules'
-    },
-    location: {
-      body: 'A description',
-      gettingAround: 'A car is recommended'
+//GET listing and host data based on listing id
+app.get('/listing/:id', (req, res) => {
+  const queryStr = `SELECT * FROM listings INNER JOIN hosts ON listings.host=hosts.id WHERE listings.id=${req.params.id}`;
+  client.query(queryStr, (err, data) => {
+    if (err) {
+      console.error('error getting listing by id', err);
+      res.sendStatus(500, 'try again later');
+    } else {
+      res.json(data.rows[0]);
     }
   });
-  Host.create(doc)
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      console.error('error posting document to db', err);
-      res.send(500, 'try again later');
-    });
-  listingNumber++;
 });
 
-//DELETE a record by id
-app.delete('/host/:id', (req, res) => {
-  Host.findByIdAndDelete(req.params.id)
-    .then(result =>
-      res.status(200).send(`deleted host number ${req.params.id}`)
-    )
-    .catch(err => {
-      console.error('Error deleting record', err);
-      res.status(500).send('try again');
-    });
+//POST create a new listing
+app.post('/listing', (req, res) => {
+  const num = 10000011;
+  const queryStr = `INSERT INTO listings (id, host, image, ratings, reviews, neighborhood, gettingaround, rules) values (${num}, 2, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', 3.9269188095712453, 470, 'Quisquam dolorem esse. Nihil sequi cupiditate laborum. Dolore incidunt unde rerum modi. Tenetur velit vitae sed quisquam nemo error iste. Error laboriosam non quidem cupiditate eum. Hic qui doloribus.', 'Officiis et beatae ex aut. Est ipsam enim labore iusto culpa harum architecto rem. Voluptatem quia laudantium.', 'Doloremque dignissimos animi ducimus quia soluta quo');`;
+  client.query(queryStr, (err, result) => {
+    if (err) {
+      console.log('could not insert listing', err);
+      res.sendStatus(500, 'please try again later');
+    } else {
+      res.status(201).send('inserted listing');
+    }
+  });
 });
 
-//PUT update a record to change rules
-app.put('/host/:id', (req, res) => {
-  let change = 'new Name';
-  Host.findByIdAndUpdate(req.params.id, {name: change}, {new: true})
-    .then(result => res.status(200).send(result))
-    .catch(err => {
-      res.status(500).send(err);
-    });
+//DELETE listing by id
+app.delete('/listing/:id', (req, res) => {
+  const queryStr = `DELETE FROM listings WHERE id=${req.params.id}`;
+  client.query(queryStr, (err) => {
+    if (err) {
+      res.status(500).send('try again later');
+    } else {
+      res.send('deleted listing');
+    }
+  });
+});
 
+//PUT update a listing to change image
+app.put('/listing/:id', (req, res) => {
+  //const {image} = req.body;
+  //change set image=${image};
+  const queryStr = `UPDATE listings SET image='https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg' WHERE id=${req.params.id}`;
+  client.query(queryStr, (err) => {
+    if (err) {
+      res.status(500).send('try again later');
+    } else {
+      res.send('updated listing');
+    }
+  });
 });
 
 
