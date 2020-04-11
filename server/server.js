@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 app.get('/listing/:id', (req, res) => {
   const queryStr = `SELECT * FROM listings INNER JOIN hosts ON listings.host=hosts.id WHERE listings.id=${req.params.id}`;
   client.query(queryStr, (err, data) => {
-    const info = data.rows[0];
-    console.log("line 27", info);
+    // const info = data.rows[0];
+    // console.log("line 27", info);
     if (err) {
       console.error('server.js error getting listing by id', err);
       res.sendStatus(500, 'try again later');

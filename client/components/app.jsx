@@ -7,9 +7,12 @@ import Properties from './properties.jsx';
 import './app.module.css';
 import $ from 'jquery';
 
+let params = (new URL(document.location)).searchParams;
+let listingId = parseInt(params.get('listingId')) || 2;
+
+
 class App extends React.Component {
   constructor (props) {
-    console.log('app.jsx', props);
     super(props);
     this.state = {
       info: {
@@ -38,7 +41,7 @@ class App extends React.Component {
 
   getInfo() {
     $.ajax({
-      url: `http://localhost:3004/listing/${this.props.listingId}`,
+      url: 'http://localhost:3004/listing/' + listingId,
       method: 'GET',
       success: (data) => {
         this.setState({
