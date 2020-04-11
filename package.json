@@ -25,6 +25,7 @@
     "mongoose": "^5.9.4",
     "newrelic": "^6.5.0",
     "pg": "^8.0.1",
+    "pug": "^2.0.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-styleable": "^3.3.2",

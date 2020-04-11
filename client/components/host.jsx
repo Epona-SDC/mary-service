@@ -25,10 +25,10 @@ class Host extends React.Component {
         <div className={style.profile}>
           <h2>Hosted by {data.name}</h2>
           <p className={style.location}>
-            {data.city}, {data.state} · Joined in {data.monthJoined} {data.yearJoined}
+            {data.city}, {data.state} · Joined in {data.monthjoined} {data.yearjoined}
           </p>
           <p>
-            <span class="fas fa-star"></span> &nbsp; {data.reviews} Reviews &nbsp; <span class="fas fa-badge-check"></span> &nbsp; Verified
+            <span className="fas fa-star"></span> &nbsp; {data.reviews} Reviews &nbsp; <span class="fas fa-badge-check"></span> &nbsp; Verified
           </p>
           <div className={style.picWrapper}>
             <img className={style.profilePic} src={data.profile} width={60} height={60} mode='fit'></img>

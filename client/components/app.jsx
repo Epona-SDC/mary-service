@@ -9,6 +9,7 @@ import $ from 'jquery';
 
 class App extends React.Component {
   constructor (props) {
+    console.log('app.jsx', props);
     super(props);
     this.state = {
       info: {

@@ -8,6 +8,9 @@ const client = require('../databases/connection.js');
 const port = 3004;
 const app = express();
 
+// app.set('views', './public');
+// app.set('view engine', 'pug');
+
 app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(cors());
 app.use(bodyParser.json());
@@ -16,22 +19,28 @@ app.use(bodyParser.json());
 
 
 //GET listing and host data based on listing id
+// app.get('/listing/:id', (req, res) => {
 app.get('/listing/:id', (req, res) => {
   const queryStr = `SELECT * FROM listings INNER JOIN hosts ON listings.host=hosts.id WHERE listings.id=${req.params.id}`;
   client.query(queryStr, (err, data) => {
+    const info = data.rows[0];
+    console.log("line 27", info);
     if (err) {
-      console.error('server.js error getting listing by id', err.stack);
+      console.error('server.js error getting listing by id', err);
       res.sendStatus(500, 'try again later');
     } else {
       res.json(data.rows[0]);
+      // res.render('index', {listingId: req.params.id, info: info}).end();
     }
   });
+  // res.render('index', {listingId: req.params.id, info: data.rows[0]});
+  // res.render('index', {listingId: req.params.id});
 });
 
 //POST create a new listing
 app.post('/listing', (req, res) => {
-  const num = 10000011;
-  const queryStr = `INSERT INTO listings (id, host, image, ratings, reviews, neighborhood, gettingaround, rules) values (${num}, 2, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', 3.9269188095712453, 470, 'Quisquam dolorem esse. Nihil sequi cupiditate laborum. Dolore incidunt unde rerum modi. Tenetur velit vitae sed quisquam nemo error iste. Error laboriosam non quidem cupiditate eum. Hic qui doloribus.', 'Officiis et beatae ex aut. Est ipsam enim labore iusto culpa harum architecto rem. Voluptatem quia laudantium.', 'Doloremque dignissimos animi ducimus quia soluta quo');`;
+  // const num = 10000011;
+  const queryStr = "INSERT INTO listings (host, image, ratings, reviews, neighborhood, gettingaround, rules) values (2, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', 3.9269188095712453, 470, 'Quisquam dolorem esse. Nihil sequi cupiditate laborum. Dolore incidunt unde rerum modi. Tenetur velit vitae sed quisquam nemo error iste. Error laboriosam non quidem cupiditate eum. Hic qui doloribus.', 'Officiis et beatae ex aut. Est ipsam enim labore iusto culpa harum architecto rem. Voluptatem quia laudantium.', 'Doloremque dignissimos animi ducimus quia soluta quo');";
   client.query(queryStr, (err, result) => {
     if (err) {
       console.log('could not insert listing', err);
