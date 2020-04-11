@@ -5,7 +5,6 @@ import styleable from 'react-styleable';
 class Host extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props', this.props);
     this.state = {
       Body: <p>{this.props.data.blurb.slice(0, 200)}... <a className={this.props.css.links}href='' onClick={this.handleClick.bind(this)}>Read more</a></p>
     };
@@ -32,7 +31,7 @@ class Host extends React.Component {
             <span class="fas fa-star"></span> &nbsp; {data.reviews} Reviews &nbsp; <span class="fas fa-badge-check"></span> &nbsp; Verified
           </p>
           <div className={style.picWrapper}>
-            <img className={style.profilePic} src={data.image} width={60} height={60} mode='fit'></img>
+            <img className={style.profilePic} src={data.profile} width={60} height={60} mode='fit'></img>
           </div>
         </div>
         <div className={style.superhost}>

@@ -5,7 +5,6 @@ import styleable from 'react-styleable';
 class Neighborhood extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props in neighborhood', this.props);
     this.state = {
       showGettingAround: false,
       GettingAround:

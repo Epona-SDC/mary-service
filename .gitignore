@@ -25,3 +25,5 @@ coverage
 build/
 dist/
 config.js
+
+newrelic.js

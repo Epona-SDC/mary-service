@@ -7,10 +7,10 @@ import App from './components/app.jsx';
 const appDom = document.querySelector('#thao');
 // const config = API.GoogleAPI;
 
-const { listingId } = window;
+const { listing } = window;
 
 function imageSlideClick(className) {
   const el = document.querySelector('.' + className);
 }
 
-ReactDOM.render(<App listingId={listingId || 1} />, appDom);
+ReactDOM.render(<App listingId={listing || 1} />, appDom);

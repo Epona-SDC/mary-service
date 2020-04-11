@@ -14,7 +14,7 @@ class App extends React.Component {
       info: {
         id: 2489864,
         host: 2489864,
-        image: 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/host28.jpg',
+        profile: 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/host28.jpg',
         ratings: '4.096865749194226',
         reviews: 221,
         neighborhood: 'Labore expedita aut laudantium rerum laborum iure corporis quia. Libero hic architecto ullam qui. Omnis rerum deleniti quasi fugit id sunt. Suscipit autem voluptate non quia quibusdam itaque. Labore qui eum delectus quas quo.',
@@ -40,19 +40,17 @@ class App extends React.Component {
       url: `http://localhost:3004/listing/${this.props.listingId}`,
       method: 'GET',
       success: (data) => {
-        console.log('app.jsx line 43', data);
         this.setState({
           info: data
         });
       },
       error: (err) => {
-        console.error('could not get listing info', err);
+        console.error('app.jsx could not get listing info', err);
       }
     });
   }
 
   render () {
-    console.log('this is data in app.jsx,', this.state.info);
     return (
       <div>
         <div>
@@ -69,24 +67,5 @@ class App extends React.Component {
   }
 }
 
-
-// function App(props) {
-//   return (
-//     <div>
-//       <div>
-//         <Host data={props.data}/>
-//       </div>
-//       <div>
-//         <Neighborhood data={props.data}/>
-//       </div>
-//       <div>
-//         <Properties data={props.data}/>
-//       </div>
-//       <div>
-//         <ThingsToDo data={props.data}/>
-//       </div>
-//     </div>
-//   );
-// }
 
 export default App;

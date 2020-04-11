@@ -1,7 +1,6 @@
-CREATE TABLE listings
-(
-  id INTEGER PRIMARY KEY NOT NULL,
-  host INTEGER Not Null,
+CREATE TABLE listings (
+  id SERIAL PRIMARY KEY NOT NULL,
+  host INTEGER NOT NULL,
   image VARCHAR(60) NOT NULL,
   ratings DECIMAL NOT NULL,
   reviews INTEGER NOT NULL,
@@ -14,10 +13,10 @@ CREATE TABLE listings
 //Below, change path name to where your Host.csv file is
 //Then copy the below command into your psql shell!!!!
 
-\COPY listings from '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/Listings.csv' DELIMITER ';' CSV Header;
+\COPY listings (host, image, ratings, reviews, neighborhood, gettingAround, rules) from '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/Listings.csv' DELIMITER ';' CSV Header;
 
 //to add the foreign key constraint, enter this:
-\alter table listings add constraint fk_listings_host foreign key (host) references hosts (id);
+Alter TABLE listings add constraint fk_listings_host foreign key (host) references hosts (id);
 
 
 //Here are the querries you can make from the psql shell

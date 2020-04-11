@@ -1,13 +1,13 @@
 CREATE TABLE hosts (
   id INTEGER PRIMARY KEY NOT NULL,
   name VARCHAR(20) NOT NULL,
-  image VARCHAR(60) NOT NULL,
+  profile VARCHAR(60) NOT NULL,
   city VARCHAR(50) NOT NULL,
   state VARCHAR(5) NOT NULL,
   blurb VARCHAR(500) NOT NULL,
   interaction VARCHAR(500) NOT NULL,
   monthJoined VARCHAR(20) NOT NULL,
-  yearJoined VARCHAR(10) NOT NULL,
+  yearJoined VARCHAR(10) NOT NULL
 );
 
 //Below, change path name to where your Host.csv file is

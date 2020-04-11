@@ -1,3 +1,4 @@
+const nr = require('newrelic');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -19,7 +20,7 @@ app.get('/listing/:id', (req, res) => {
   const queryStr = `SELECT * FROM listings INNER JOIN hosts ON listings.host=hosts.id WHERE listings.id=${req.params.id}`;
   client.query(queryStr, (err, data) => {
     if (err) {
-      console.error('error getting listing by id', err);
+      console.error('server.js error getting listing by id', err.stack);
       res.sendStatus(500, 'try again later');
     } else {
       res.json(data.rows[0]);
