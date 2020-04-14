@@ -30,16 +30,13 @@ app.get('/listing/:id', (req, res) => {
       res.sendStatus(500, 'try again later');
     } else {
       res.json(data.rows[0]);
-      // res.render('index', {listingId: req.params.id, info: info}).end();
     }
   });
-  // res.render('index', {listingId: req.params.id, info: data.rows[0]});
   // res.render('index', {listingId: req.params.id});
 });
 
 //POST create a new listing
 app.post('/listing', (req, res) => {
-  // const num = 10000011;
   const queryStr = "INSERT INTO listings (host, image, ratings, reviews, neighborhood, gettingaround, rules) values (2, 'https://ep-sdc-images.s3-us-west-2.amazonaws.com/30.jpg', 3.9269188095712453, 470, 'Quisquam dolorem esse. Nihil sequi cupiditate laborum. Dolore incidunt unde rerum modi. Tenetur velit vitae sed quisquam nemo error iste. Error laboriosam non quidem cupiditate eum. Hic qui doloribus.', 'Officiis et beatae ex aut. Est ipsam enim labore iusto culpa harum architecto rem. Voluptatem quia laudantium.', 'Doloremque dignissimos animi ducimus quia soluta quo');";
   client.query(queryStr, (err, result) => {
     if (err) {

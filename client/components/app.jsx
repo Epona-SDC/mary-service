@@ -8,7 +8,7 @@ import './app.module.css';
 import $ from 'jquery';
 
 let params = (new URL(document.location)).searchParams;
-let listingId = parseInt(params.get('listingId')) || 2;
+let listingId = parseInt(params.get('listingId')) || 1;
 
 
 class App extends React.Component {

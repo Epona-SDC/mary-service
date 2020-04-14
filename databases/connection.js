@@ -18,27 +18,20 @@ client.connect(err => {
 
 module.exports = client;
 
-
-// const { Pool } = require('pg');
 // const pool = new Pool({
-//   user: 'postgres',
+//   user: 'me',
 //   host: 'localhost',
 //   database: 'airbnb',
-//   password: null,
+//   password: 'root',
 //   port: 5433,
 // });
 
-// // pool.connect(err => {
-// //   if (err) {
-// //     console.log('error connecting to postgres', err.stack);
-// //   } else {
-// //     console.log('connected to postgres');
-// //   }
-// // });
-
-// pool.query('SELECT NOW()', (err, res) => {
-//   console.log(err, res);
-//   pool.end();
+// pool.connect(err => {
+//   if (err) {
+//     console.log('error connecting to postgres', err.stack);
+//   } else {
+//     console.log('connected to postgres with pool');
+//   }
 // });
 
 // module.exports = pool;

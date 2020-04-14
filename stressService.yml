@@ -1,13 +1,9 @@
 config:
-  target: 'http://localhost:3004/'
+  target: 'http://localhost:3004'
   phases:
     - duration: 30
       arrivalRate: 10
-  variables:
-    id: '9980000'
 scenarios:
   - flow:
-    - name: 'get info by listing id'
     - get:
-        # url: "/listing/:{{id}}"
-        url: "/listing/"
+        url: "/listing/9700000"
