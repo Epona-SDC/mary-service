@@ -35,7 +35,7 @@ class Neighborhood extends React.Component {
           <div className={this.props.css.readNeigh}>
             <h3>Getting around</h3>
             <p>
-              {this.props.data.location.gettingAround} <br/>
+              {this.props.data.gettingaround} <br/>
             Property is conveniently located near the bus line with limited service.
             </p>
             <div>
@@ -62,7 +62,7 @@ class Neighborhood extends React.Component {
         Rules:
           <div className={this.props.css.readNeigh}>
             <h3>Additional Rules</h3>
-            <p>{this.props.data.rules.body}</p>
+            <p>{this.props.data.rules}</p>
             <div>
               <a className={this.props.css.click} href='' onClick={this.handleClickRules.bind(this)}>Hide rules<span className={`fas fa-chevron-up ${this.props.css.icon}`}></span></a>
             </div>
@@ -78,22 +78,18 @@ class Neighborhood extends React.Component {
         <div className={this.props.css.location}>{`${this.props.data.name}'s place is located in ${this.props.data.city} ${this.props.data.state} United States.`}
         </div>
         <p className={this.props.css.body}>
-          {this.props.data.location.body}
+          {this.props.data.neighborhood}
         </p>
         {this.state.GettingAround}
         <div className={this.props.css.map}>
-          <iframe
-            src={`https://www.google.com/maps/embed/v1/place?key=${this.props.api}
-         &q=${this.props.data.zip}`}>
-          </iframe>
           <p className={this.props.css.mapP}>
        Exact location information is provided after a booking is confirmed.
           </p>
         </div>
         <h2 className={this.props.css.title}>Things to keep in mind</h2>
         <p className={this.props.css.checkTime}>
-          <strong>Check-in:</strong> {this.props.data.rules.checkin} <br/>
-          <strong>Checkout:</strong> {this.props.data.rules.checkout}
+          <strong>Check-in:</strong> 1PM - 5PM <br/>
+          <strong>Checkout:</strong> 11AM
         </p>
         <h3>House Rules</h3>
         <div className={this.props.css.rulesBody}>
@@ -119,3 +115,9 @@ class Neighborhood extends React.Component {
 }
 
 export default styleable(css)(Neighborhood);
+
+//removed from line 84 I think
+{/* <iframe
+src={`https://www.google.com/maps/embed/v1/place?key=${this.props.api}
+&q=${24123}`} alt='map placeholder'>
+</iframe> */}

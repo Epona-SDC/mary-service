@@ -6,14 +6,14 @@ class Host extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Body: <p>{this.props.data.body.slice(0, 200)}... <a className={this.props.css.links}href='' onClick={this.handleClick.bind(this)}>Read more</a></p>
+      Body: <p>{this.props.data.blurb.slice(0, 200)}... <a className={this.props.css.links}href='' onClick={this.handleClick.bind(this)}>Read more</a></p>
     };
   }
 
   handleClick(e) {
     e.preventDefault();
     this.setState ({
-      Body: <p>{this.props.data.body}</p>
+      Body: <p>{this.props.data.blurb}</p>
     });
   }
 
@@ -25,13 +25,13 @@ class Host extends React.Component {
         <div className={style.profile}>
           <h2>Hosted by {data.name}</h2>
           <p className={style.location}>
-            {data.city}, {data.state} · Joined in {data.monthJoined} {data.yearJoined}
+            {data.city}, {data.state} · Joined in {data.monthjoined} {data.yearjoined}
           </p>
           <p>
-            <span class="fas fa-star"></span> &nbsp; {data.review} Reviews &nbsp; <span class="fas fa-badge-check"></span> &nbsp; {data.verified}
+            <span className="fas fa-star"></span> &nbsp; {data.reviews} Reviews &nbsp; <span class="fas fa-badge-check"></span> &nbsp; Verified
           </p>
           <div className={style.picWrapper}>
-            <img className={style.profilePic} src={data.image} width={60} height={60} mode='fit'></img>
+            <img className={style.profilePic} src={data.profile} width={60} height={60} mode='fit'></img>
           </div>
         </div>
         <div className={style.superhost}>

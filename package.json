@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start-dev": "nodemon ./server/server.js",
+    "devStart": "nodemon ./server/server.js",
     "start-pro": "pm2 start ./server/server.js",
     "build": "webpack --config webpack.config.js -w",
     "seed": "node databases/seeddb.js",
@@ -21,8 +21,11 @@
     "css-loader": "^3.4.2",
     "express": "^4.17.1",
     "faker": "^4.1.0",
+    "jquery": "^3.4.1",
     "mongoose": "^5.9.4",
-    "pg": "^8.0.0",
+    "newrelic": "^6.5.0",
+    "pg": "^8.0.1",
+    "pug": "^2.0.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-styleable": "^3.3.2",

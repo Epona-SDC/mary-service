@@ -1,0 +1,9 @@
+config:
+  target: 'http://localhost:3004'
+  phases:
+    - duration: 30
+      arrivalRate: 10
+scenarios:
+  - flow:
+    - get:
+        url: "/listing/9700000"

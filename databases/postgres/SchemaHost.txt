@@ -1,25 +1,23 @@
 CREATE TABLE hosts (
   id INTEGER PRIMARY KEY NOT NULL,
   name VARCHAR(20) NOT NULL,
-  image VARCHAR(60) NOT NULL,
+  profile VARCHAR(60) NOT NULL,
   city VARCHAR(50) NOT NULL,
   state VARCHAR(5) NOT NULL,
   blurb VARCHAR(500) NOT NULL,
   interaction VARCHAR(500) NOT NULL,
   monthJoined VARCHAR(20) NOT NULL,
-  yearJoined VARCHAR(10) NOT NULL,
+  yearJoined VARCHAR(10) NOT NULL
 );
 
-\COPY hosts(id,name,image,city,state,blurb,interaction,monthJoined,yearJoined) from 'C:\Users\straw\OneDrive\Desktop\HackReactor\SDC\thao-service\databases\3mHosts.csv' DELIMITER ';' CSV Header;
+//Below, change path name to where your Host.csv file is
+//Then copy the below command into your psql shell!!!!
 
-\COPY hosts from '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/3mHosts.csv' DELIMITER ';' CSV Header;
+\COPY hosts from '/mnt/c/Users/straw/OneDrive/Desktop/HackReactor/SDC/thao-service/databases/Hosts.csv' DELIMITER ';' CSV Header;
 
 1. install postgres
 2. open psql shell
 3. command: create database airbnb
 4. \c airbnb
-5. create table host....
+5. create table host
 6. copy script.
-
-
-
