@@ -7,8 +7,8 @@ import Properties from './properties.jsx';
 import './app.module.css';
 import $ from 'jquery';
 
-let params = (new URL(document.location)).searchParams;
-let listingId = parseInt(params.get('listingId')) || 1;
+//let params = (new URL(document.location)).searchParams;
+//let listingId = parseInt(params.get('id')) || 1;
 
 
 class App extends React.Component {
@@ -40,8 +40,11 @@ class App extends React.Component {
   }
 
   getInfo() {
+   // let params = (new URL(document.location)).searchParams;
+	//  let listingId = parseInt(params.get('id')) || 1;
+	let listingId = window.location.href.split('=')[1];
     $.ajax({
-      url: 'http://localhost:3004/listing/' + listingId,
+	    url: 'http://52.34.72.254/listing/' + listingId,
       method: 'GET',
       success: (data) => {
         this.setState({
