@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const client = require('../databases/connection.js');
 
-const port = 3004;
+const port = 80;
 const app = express();
 
 // app.set('views', './public');
@@ -21,18 +21,15 @@ app.use(bodyParser.json());
 //GET listing and host data based on listing id
 // app.get('/listing/:id', (req, res) => {
 app.get('/listing/:id', (req, res) => {
-  const queryStr = `SELECT * FROM listings INNER JOIN hosts ON listings.host=hosts.id WHERE listings.id=${req.params.id}`;
-  client.query(queryStr, (err, data) => {
-    // const info = data.rows[0];
-    // console.log("line 27", info);
-    if (err) {
+	const queryStr = 'SELECT * FROM listings INNER JOIN hosts ON listings.host=hosts.id WHERE listings.id=$1';
+  client.query(queryStr, [req.params.id], (err, data) => {
+         if (err) {
       console.error('server.js error getting listing by id', err);
       res.sendStatus(500, 'try again later');
     } else {
-      res.json(data.rows[0]);
+	   res.json(data.rows[0]);
     }
   });
-  // res.render('index', {listingId: req.params.id});
 });
 
 //POST create a new listing
